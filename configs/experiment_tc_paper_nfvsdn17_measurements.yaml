@@ -6,14 +6,14 @@ version: 0.1
 
 # time limit for measurement (s) (expandable)
 max_time_t: null
-repetitions: 30
+repetitions: 25
 # path to write results as pickled Pandas DF 
 result_path: "out/experiment_tc_paper_nfvsdn17_measurements.pkl"
 result_path_add_timestamp: False
 
 pmodels:
     - name: NFVSDN17ExperimentMeasurements
-      n_model_instances: 10
+      n_model_instances: 1
       topologies: ["nx-sc-sq", "sc-sq-nx", "sq-nx-sc", "nx-sc-sq-phys-isolated", "sc-sq-nx-phys-isolated", "sq-nx-sc-phys-isolated"]
       raw_data_path: "analysis/data/peuster_karl_ieeenfvsdn17_3vnf_sfc_profile.pkl"
 
@@ -28,10 +28,10 @@ selector:
       # max. no. of samples to be selected (expandable)
       max_samples: {min: 2, max: 18, step: 2}
       max_border_points: 10  # PANIC: 2^d * 5 (5 ~ sqrt(20) lots of possible values)
-    - name: PanicGreedyAdaptiveSelector
+    #- name: PanicGreedyAdaptiveSelector
       # max. no. of samples to be selected (expandable)
-      max_samples: {min: 2, max: 18, step: 2}
-      max_border_points: 18  # PANIC: 2^d * 5 (5 ~ sqrt(20) lots of possible values)
+    #  max_samples: {min: 2, max: 18, step: 2}
+    #  max_border_points: 18  # PANIC: 2^d * 5 (5 ~ sqrt(20) lots of possible values)
     - name: WeightedVnfSelector
       max_samples: {min: 2, max: 18, step: 2}
       border_point_mode: 2  # 0 = max, 1 = min, 2 = both
@@ -108,8 +108,8 @@ predictor:
     #  degree: [2, 3]  # (expandable)
     - name: SVRPredictorRbfKernel
       epsilon: [0.1]  # (expandable)
-    - name: SVRPredictorLinearKernel
-      epsilon: [0.1]  # (expandable)
+    #- name: SVRPredictorLinearKernel
+    #  epsilon: [0.1]  # (expandable)
     #- name: SVRPredictorPolyKernel
     #  epsilon: [0.1]  # (expandable)
     - name: DecisionTreeRegressionPredictor
@@ -130,7 +130,7 @@ error_metrics:
     - name: RMSD
     - name: NRMSDMean
     - name: NRMSDRange
-    #- name: MAE
+    - name: MAE
     #- name: R2
     #- name: EVS
     #- name: MEDAE
