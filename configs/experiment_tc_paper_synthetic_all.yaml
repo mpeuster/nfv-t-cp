@@ -6,14 +6,14 @@ version: 0.1
 
 # time limit for measurement (s) (expandable)
 max_time_t: null
-repetitions: 30
+repetitions: 25
 # path to write results as pickled Pandas DF 
 result_path: "out/experiment_tc_paper_synthetic_all.pkl"
 result_path_add_timestamp: False
 
 pmodels:
     - name: RandomSyntheticModel
-      n_model_instances: 10
+      n_model_instances: 1
       a1_range: [0.1, 2.0]
       func_set: [1, 2, 3, 4, 5, 6, 7, 8]
       #topologies: ["l1", "l2", "l3", "l4", "l5", "d2", "d3", "d4", "d5"]
@@ -45,10 +45,10 @@ selector:
       # max. no. of samples to be selected (expandable)
       max_samples: {min: 4, max: 36, step: 4}
       max_border_points: 10  # PANIC: 2^d * 5 (5 ~ sqrt(20) lots of possible values)
-    - name: PanicGreedyAdaptiveSelector
+      #- name: PanicGreedyAdaptiveSelector
       # max. no. of samples to be selected (expandable)
-      max_samples: {min: 4, max: 36, step: 4}
-      max_border_points: 20  # PANIC: 2^d * 5 (5 ~ sqrt(20) lots of possible values)
+      #max_samples: {min: 4, max: 36, step: 4}
+      #max_border_points: 20  # PANIC: 2^d * 5 (5 ~ sqrt(20) lots of possible values)
     #- name: WeightedVnfSelector
     #  max_samples: {min: 2, max: 36, step: 2}
     #  border_point_mode: 2  # 0 = max, 1 = min, 2 = both
@@ -131,8 +131,8 @@ predictor:
     #  degree: [2, 3]  # (expandable)
     - name: SVRPredictorRbfKernel
       epsilon: [0.1]  # (expandable)
-    - name: SVRPredictorLinearKernel
-      epsilon: [0.1]  # (expandable)
+    #  - name: SVRPredictorLinearKernel
+    #  epsilon: [0.1]  # (expandable)
     #- name: SVRPredictorPolyKernel
     #  epsilon: [0.1]  # (expandable)
     - name: DecisionTreeRegressionPredictor
